@@ -1,0 +1,50 @@
+CREATE TABLE Candidates (
+    id int not null primary key auto_increment,
+    name varchar(30) not null,
+    description varchar(125) not null,
+    image varchar(125) not null
+);
+CREATE TABLE Electors(
+    id int not null primary key auto_increment,
+    login varchar(30) not null,
+    password varchar(30) not null,
+    weight int not null,
+    email varchar(50) not null
+);
+
+CREATE TABLE Ballots(
+    id int not null primary key auto_increment,
+    title varchar(50) not null,
+    start date not null,
+    end date,
+    isPublic boolean not null,
+    isAnonymous boolean not null,
+    ownerId int not null,
+    forumId int not null,
+    FOREIGN KEY (ownerId) REFERENCES Electors(id)
+);
+CREATE TABLE BallotElector(
+    id int not null primary key auto_increment,
+    pollId int not null,
+    electorId int not null,
+    FOREIGN KEY (pollId) REFERENCES Ballots(id),
+    FOREIGN KEY (electorId) REFERENCES Electors(id)
+);
+CREATE TABLE BallotCandidate(
+    id int not null primary key auto_increment,
+    pollId int not null,
+    candidateId int not null,
+    FOREIGN KEY (pollId) REFERENCES Ballots(id),
+    FOREIGN KEY (candidateId) REFERENCES Candidates(id)
+);
+CREATE TABLE Votes(
+    id int not null primary key auto_increment,
+    dateVoteMade date not null,
+    rank int not null,
+    pollId int not null,
+    pollSubjectId int not null,
+    electorId int not null,
+    FOREIGN KEY (pollId) REFERENCES Ballots(id),
+    FOREIGN KEY (pollSubjectId) REFERENCES Candidates(id),
+    FOREIGN KEY (electorId) REFERENCES Electors(id)
+);
