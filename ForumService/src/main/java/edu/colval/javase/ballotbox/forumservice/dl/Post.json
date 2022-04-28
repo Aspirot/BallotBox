@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "date":"1985-06-18",
+    "message":"He deserved that win",
+    "forumId":1,
+    "electorId":1
+  },
+  {
+    "id": 2,
+    "date":"2000-09-11",
+    "message":"IN HIS FACE! NEVER LIKED THE GUY!",
+    "forumId":2,
+    "electorId":3
+  },
+  {
+    "id": 3,
+    "date":"2020-01-10",
+    "message":"It really surprised everyone!",
+    "forumId":3,
+    "electorId":5
+  },
+  {
+    "id": 4,
+    "date":"2020-01-18",
+    "message":"Can't believe he was making chicken nuggets...",
+    "forumId":3,
+    "electorId":6
+  }
+]

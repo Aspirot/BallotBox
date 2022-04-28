@@ -1,4 +1,4 @@
-package edu.colval.javase.ballotbox.voteservice;
+package edu.colval.javase.ballotbox.voteservice.fel;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

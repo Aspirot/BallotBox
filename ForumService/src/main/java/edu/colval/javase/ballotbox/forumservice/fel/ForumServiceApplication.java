@@ -1,13 +1,13 @@
-package edu.colval.javase.ballotbox.electionservice;
+package edu.colval.javase.ballotbox.forumservice.fel;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ElectionServiceApplication {
+public class ForumServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ElectionServiceApplication.class, args);
+        SpringApplication.run(ForumServiceApplication.class, args);
     }
 
 }
