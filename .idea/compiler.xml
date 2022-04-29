@@ -10,7 +10,6 @@
         <module name="ElectorService" />
         <module name="VoteService" />
         <module name="Discovery-Service" />
-        <module name="EurekaClient-Service" />
         <module name="ElectionService" />
       </profile>
     </annotationProcessing>
