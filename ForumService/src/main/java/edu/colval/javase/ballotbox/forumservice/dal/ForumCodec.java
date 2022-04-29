@@ -21,15 +21,7 @@ public class ForumCodec {
         Forum forum = new Forum();
         forum.setId(document.getInteger("id"));
         forum.setTitle(document.getString("title"));
-
-        String input = document.getString("createdOn");
-        DateTimeFormatter f = DateTimeFormatter.ofPattern( "E MMM dd HH:mm:ss z uuuu" )
-                .withLocale( Locale.US );
-        ZonedDateTime zdt = ZonedDateTime.parse( input , f );
-        LocalDate ld = zdt.toLocalDate();
-        forum.setCreatedOn(ld);
-
-
+        forum.setCreatedOn(LocalDate.parse(document.getString("createdOn")));
         return forum;
     }
 }
