@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class VoteDAO {
+public class VoteDAO implements IVoteDAO{
         private static VoteDAO instance = null;
         private I_SQL_Connector driver;
 
@@ -49,7 +49,7 @@ public class VoteDAO {
         //System.exit(0);
         runUpdateQuery(sql);
         }*/
-
+        @Override
         public void createVote( LocalDate when, int rank, int pollId, int pollSubjectId, int electorId){
             String sql = String.format("INSERT INTO Votes (dateVoteMade, rank, pollId, pollSubjectId, electorId) " +
                     "VALUES ('%s', '%d', '%d', '%d', '%d');",
@@ -57,6 +57,7 @@ public class VoteDAO {
             runUpdateQuery(sql);
         }
 
+        @Override
         public List<Vote> findAllVotes() {
             List<Vote> votes = new ArrayList();
             try {
@@ -77,6 +78,102 @@ public class VoteDAO {
                 Logger.getLogger(VoteDAO.class.getName()).log(Level.SEVERE, null, ex);
             }//try
             return votes;
+        }
+
+        @Override
+        public List<Vote> getAllVotesForBallot(int searchedPollId) {
+            List<Vote> votes = new ArrayList();
+            try {
+                Statement st = this.driver.getConnection().createStatement();
+                String query = String.format("SELECT * FROM Votes " +
+                        "WHERE pollId='%d'", searchedPollId);
+                ResultSet result = st.executeQuery(query);
+
+                while (result.next()) {
+                    int voteId = result.getInt("id");
+                    LocalDate when =LocalDate.parse(result.getString("dateVoteMade"));
+                    int rank = result.getInt("rank");
+                    int pollId = result.getInt("pollId");
+                    int pollSubjectId = result.getInt("pollSubjectId");
+                    int electorId = result.getInt("electorId");
+                    votes.add(new Vote(voteId,when, rank, pollId, pollSubjectId, electorId));
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(VoteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return votes;
+        }
+
+        @Override
+        public Vote fetchVoteById(int searchedVoteId) {
+            Vote vote = null;
+            try {
+                Statement st = this.driver.getConnection().createStatement();
+                String query = String.format("SELECT * FROM Votes " +
+                        "WHERE voteId='%d'", searchedVoteId);
+                ResultSet result = st.executeQuery(query);
+
+                while (result.next()) {
+                    int voteId = result.getInt("id");
+                    LocalDate when =LocalDate.parse(result.getString("dateVoteMade"));
+                    int rank = result.getInt("rank");
+                    int pollId = result.getInt("pollId");
+                    int pollSubjectId = result.getInt("pollSubjectId");
+                    int electorId = result.getInt("electorId");
+                    vote=(new Vote(voteId,when, rank, pollId, pollSubjectId, electorId));
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(VoteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return vote;
+        }
+
+        @Override
+        public Vote fetchVoteByCandidateId_PollId_Rank(int searchedCandidateId, int searchedPollId, int searchRank) {
+            Vote vote = null;
+            try {
+                Statement st = this.driver.getConnection().createStatement();
+                String query = String.format("SELECT * FROM Votes " +
+                        "WHERE voteId='%d' AND pollId='%d' AND rank='%d'", searchedCandidateId, searchedPollId, searchRank);
+                ResultSet result = st.executeQuery(query);
+
+                while (result.next()) {
+                    int voteId = result.getInt("id");
+                    LocalDate when =LocalDate.parse(result.getString("dateVoteMade"));
+                    int rank = result.getInt("rank");
+                    int pollId = result.getInt("pollId");
+                    int pollSubjectId = result.getInt("pollSubjectId");
+                    int electorId = result.getInt("electorId");
+                    vote=(new Vote(voteId,when, rank, pollId, pollSubjectId, electorId));
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(VoteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return vote;
+        }
+
+        @Override
+        public Vote fetchVoteByElectorId_PollId_Rank(int searchedElectorId, int searchedPollId, int searchedRank) {
+            Vote vote = null;
+            try {
+                Statement st = this.driver.getConnection().createStatement();
+                String query = String.format("SELECT * FROM Votes " +
+                        "WHERE electorId='%d' AND pollId='%d' AND rank='%d'", searchedElectorId, searchedPollId, searchedRank);
+                ResultSet result = st.executeQuery(query);
+
+                while (result.next()) {
+                    int voteId = result.getInt("id");
+                    LocalDate when =LocalDate.parse(result.getString("dateVoteMade"));
+                    int rank = result.getInt("rank");
+                    int pollId = result.getInt("pollId");
+                    int pollSubjectId = result.getInt("pollSubjectId");
+                    int electorId = result.getInt("electorId");
+                    vote=(new Vote(voteId,when, rank, pollId, pollSubjectId, electorId));
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(VoteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return vote;
         }
 
         private void runUpdateQuery(String sql) {
