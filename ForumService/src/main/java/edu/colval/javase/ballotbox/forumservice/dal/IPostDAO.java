@@ -10,4 +10,5 @@ public interface IPostDAO {
     List<Post> findAllPosts();
     Post findPostById(int id);
     void deletePostById(int id);
+    List<Post> fetchPostsByForumId(int forumId);
 }

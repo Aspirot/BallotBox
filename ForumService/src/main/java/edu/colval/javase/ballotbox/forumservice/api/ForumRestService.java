@@ -18,9 +18,11 @@ import java.util.List;
 public class ForumRestService {
 
     @Autowired
-    IForumDAO forumDAO;
-    @Autowired
     IPostDAO postDAO;
+
+    @Autowired
+    IForumDAO forumDAO;
+
 
     //Post
     @RequestMapping("/makePost/{id}/{date}/{message}/{forumId}/{electorId}")
@@ -65,6 +67,12 @@ public class ForumRestService {
         Forum found = null;
         found = this.forumDAO.findForumById(id);
         return found;
+    }
+
+    @RequestMapping("/findPosts/byForum/{forumId}")
+    public List<Post> searchPostsByForumId(@PathVariable("forumId") int forumId){
+        List<Post> posts = postDAO.fetchPostsByForumId(forumId);
+        return posts;
     }
 
     @RequestMapping("/deleteForum/{id}")

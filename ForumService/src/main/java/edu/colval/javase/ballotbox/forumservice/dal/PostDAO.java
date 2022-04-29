@@ -18,22 +18,31 @@ import static com.mongodb.client.model.Filters.eq;
 public class PostDAO implements IPostDAO{
 
     I_Mongodb_Connector mongodbConnector = null;
-    List<Post> posts = null;
 
     public PostDAO() {
         this.mongodbConnector = new Atlas_Mongodb_Connector();
-        findAllPosts();
     }
 
 
     public List<Post> findAllPosts() {
-        this.posts = new ArrayList<>();
+        List<Post> posts = new ArrayList<>();
         MongoCollection<Document> collection =
                 this.mongodbConnector.getDatabase().getCollection("Posts");
         FindIterable<Document> documents = collection.find();
         for(var doc : documents)
-            this.posts.add(PostCodec.decode(doc));
-        return this.posts;
+            posts.add(PostCodec.decode(doc));
+        return posts;
+    }
+
+    public List<Post> fetchPostsByForumId(int id) {
+        List<Post> posts = new ArrayList<>();
+        MongoCollection<Document> collection =
+                this.mongodbConnector.getDatabase().getCollection("Posts");
+        Document query = new Document("forumId", id);
+        FindIterable<Document> documents = collection.find(query);
+        for(var doc : documents)
+            posts.add(PostCodec.decode(doc));
+        return posts;
     }
 
     public Post findPostById(int id) {
