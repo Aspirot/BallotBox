@@ -5,6 +5,8 @@ import edu.colval.javase.ballotbox.forumservice.bll.model.Post;
 import edu.colval.javase.ballotbox.forumservice.dal.IForumDAO;
 import edu.colval.javase.ballotbox.forumservice.dal.IPostDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -20,8 +22,6 @@ public class ForumRestService {
 
     @Autowired
     IForumDAO forumDAO;
-
-
     //Post
     @PostMapping("/makePost")
     public Post createPost(@RequestBody Post newPost){

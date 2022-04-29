@@ -7,6 +7,8 @@
         <option value="$PROJECT_DIR$/VoteService/pom.xml" />
         <option value="$PROJECT_DIR$/ElectionService/pom.xml" />
         <option value="$PROJECT_DIR$/ForumService/pom.xml" />
+        <option value="$PROJECT_DIR$/Discovery-Service/pom.xml" />
+        <option value="$PROJECT_DIR$/EurekaClient-Service/pom.xml" />
       </list>
     </option>
   </component>

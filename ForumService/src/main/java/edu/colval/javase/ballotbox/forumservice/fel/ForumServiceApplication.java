@@ -5,10 +5,18 @@ import edu.colval.javase.ballotbox.forumservice.dal.ForumDAO;
 import edu.colval.javase.ballotbox.forumservice.dal.IForumDAO;
 import edu.colval.javase.ballotbox.forumservice.dal.IPostDAO;
 import edu.colval.javase.ballotbox.forumservice.dal.PostDAO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 
 @SpringBootApplication
