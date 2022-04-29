@@ -34,28 +34,15 @@ public class PostDAO {
         return this.posts;
     }
 
-    public void createPost(Post newPost){
-        Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class,new LocalDateSerializer()).create();
-        //jsonize the pojo
-        JsonElement json = gson.toJsonTree(gson.toJson(newPost, Post.class));
-        insertDocument(json);
-    }
 
-    private void insertDocument (JsonElement json) {
+
+    public void createPost (Post newPost) {
         MongoCollection collection = this.mongodbConnector.getDatabase()
                 .getCollection("Posts");
-        Document bson = Document.parse(json.toString());
+        Document bson = PostCodec.convert(newPost);
         collection.insertOne(bson);
     }
 
 
 
-}
-class LocalDateSerializer implements JsonSerializer< LocalDate > {
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MMM-yyyy");
-
-    @Override
-    public JsonElement serialize(LocalDate localDate, Type srcType, JsonSerializationContext context) {
-        return new JsonPrimitive(formatter.format(localDate));
-    }
 }

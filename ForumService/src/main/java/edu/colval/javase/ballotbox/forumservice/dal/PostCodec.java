@@ -12,7 +12,7 @@ public class PostCodec {
     public static Document convert(Post post) {
         Document document = new Document();
         document.put("id", post.getId());
-        document.put("date", post.getDate());
+        document.put("date", post.getDate().toString().substring(0,10));
         document.put("message", post.getMessage());
         document.put("forumId", post.getForumId());
         document.put("electorId", post.getElectorId());
