@@ -13,7 +13,7 @@ public class ForumCodec {
         Document document = new Document();
         document.put("id", forum.getId());
         document.put("title", forum.getTitle());
-        document.put("createdOn", forum.getCreatedOn());
+        document.put("createdOn", forum.getCreatedOn().toString().substring(0,10));
         return document;
     }
 

@@ -13,7 +13,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PostDAO {
+import static com.mongodb.client.model.Filters.eq;
+
+public class PostDAO implements IPostDAO{
 
     I_Mongodb_Connector mongodbConnector = null;
     List<Post> posts = null;
@@ -34,7 +36,12 @@ public class PostDAO {
         return this.posts;
     }
 
-
+    public Post findPostById(int id) {
+        MongoCollection<Document> collection =
+                this.mongodbConnector.getDatabase().getCollection("Posts");
+        Post found = PostCodec.decode(collection.find(eq("id",id)).first());
+        return found;
+    }
 
     public void createPost (Post newPost) {
         MongoCollection collection = this.mongodbConnector.getDatabase()
@@ -43,6 +50,10 @@ public class PostDAO {
         collection.insertOne(bson);
     }
 
-
+    public void deletePostById(int id){
+        MongoCollection<Document> collection =
+                this.mongodbConnector.getDatabase().getCollection("Posts");
+        collection.deleteOne(eq("id",id));
+    }
 
 }

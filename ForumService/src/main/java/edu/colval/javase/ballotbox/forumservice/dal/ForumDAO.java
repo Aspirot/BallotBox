@@ -10,11 +10,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ForumDAO {
+import static com.mongodb.client.model.Filters.eq;
+
+public class ForumDAO implements IForumDAO{
 
     I_Mongodb_Connector mongodbConnector = null;
     List<Forum> forums = null;
-    List<Post> posts = null;
 
     public ForumDAO() {
         this.mongodbConnector = new Atlas_Mongodb_Connector();
@@ -32,7 +33,23 @@ public class ForumDAO {
         return this.forums;
     }
 
-    public Forum createForum(){
-        return null;
+    public Forum findForumById(int id) {
+        MongoCollection<Document> collection =
+                this.mongodbConnector.getDatabase().getCollection("Forums");
+        Forum found = ForumCodec.decode(collection.find(eq("id",id)).first());
+        return found;
+    }
+
+    public void createForum(Forum newForum){
+        MongoCollection collection = this.mongodbConnector.getDatabase()
+                .getCollection("Forums");
+        Document bson = ForumCodec.convert(newForum);
+        collection.insertOne(bson);
+    }
+
+    public void deleteForumById(int id){
+        MongoCollection<Document> collection =
+                this.mongodbConnector.getDatabase().getCollection("Forums");
+        collection.deleteOne(eq("id",id));
     }
 }
