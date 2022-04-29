@@ -6,8 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="ElectorService" />
         <module name="ForumService" />
+        <module name="ElectorService" />
         <module name="VoteService" />
         <module name="ElectionService" />
       </profile>
@@ -24,7 +24,7 @@
       <module name="ElectionService" options="-parameters" />
       <module name="ElectorService" options="-parameters" />
       <module name="ForumService" options="-parameters" />
-      <module name="VoteService" options="-parameters" />
+      <module name="VoteService" options="-parameters --add-modules java.sql,java.base,java.logging" />
     </option>
   </component>
 </project>

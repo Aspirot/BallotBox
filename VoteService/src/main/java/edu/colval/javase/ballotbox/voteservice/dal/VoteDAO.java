@@ -40,6 +40,23 @@ public class VoteDAO {
             return client;
 
         }*/
+
+
+        /*public void create(String fn, String ln, String username, String password) {
+        String sql = String.format("INSERT INTO Client (firstname, lastname, username, password) " +
+                "VALUES ('%s','%s','%s','%s');", fn, ln, username, password);
+        //System.out.println(sql);
+        //System.exit(0);
+        runUpdateQuery(sql);
+        }*/
+
+        public void createVote( LocalDate when, int rank, int pollId, int pollSubjectId, int electorId){
+            String sql = String.format("INSERT INTO Votes (dateVoteMade, rank, pollId, pollSubjectId, electorId) " +
+                    "VALUES ('%s', '%d', '%d', '%d', '%d');",
+                    when.toString().substring(0, 10), rank, pollId, pollSubjectId, electorId);
+            runUpdateQuery(sql);
+        }
+
         public List<Vote> findAllVotes() {
             List<Vote> votes = new ArrayList();
             try {
