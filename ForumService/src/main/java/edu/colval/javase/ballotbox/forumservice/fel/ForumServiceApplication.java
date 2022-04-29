@@ -1,5 +1,6 @@
 package edu.colval.javase.ballotbox.forumservice.fel;
 
+import edu.colval.javase.ballotbox.forumservice.api.ForumRestService;
 import edu.colval.javase.ballotbox.forumservice.bll.model.Forum;
 import edu.colval.javase.ballotbox.forumservice.bll.model.Post;
 import edu.colval.javase.ballotbox.forumservice.dal.ForumDAO;
@@ -9,11 +10,13 @@ import edu.colval.javase.ballotbox.forumservice.dal.PostDAO;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @SpringBootApplication
+@ComponentScan(basePackageClasses = ForumRestService.class)
 public class ForumServiceApplication {
 
     @Bean

@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
+//localhost:8082/api/forumService
 @RequestMapping("/api/forumService")
 public class ForumRestService {
 
