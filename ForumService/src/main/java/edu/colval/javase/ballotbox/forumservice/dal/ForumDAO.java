@@ -47,9 +47,10 @@ public class ForumDAO implements IForumDAO{
         collection.insertOne(bson);
     }
 
-    public void deleteForumById(int id){
+    public boolean deleteForumById(int id){
         MongoCollection<Document> collection =
                 this.mongodbConnector.getDatabase().getCollection("Forums");
-        collection.deleteOne(eq("id",id));
+        var result = collection.deleteOne(eq("id",id));
+        return result.wasAcknowledged();
     }
 }

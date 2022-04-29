@@ -9,5 +9,5 @@ public interface IForumDAO {
     void createForum(Forum forum);
     List<Forum> findAllForums();
     Forum findForumById(int id);
-    void deleteForumById(int id);
+    boolean deleteForumById(int id);
 }

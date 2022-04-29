@@ -58,8 +58,8 @@
             <artifactId>gson</artifactId>
             <version>2.9.0</version>
         </dependency>
-    </dependencies>
 
+    </dependencies>
     <build>
         <plugins>
             <plugin>

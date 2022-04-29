@@ -9,6 +9,6 @@ public interface IPostDAO {
     void createPost(Post post);
     List<Post> findAllPosts();
     Post findPostById(int id);
-    void deletePostById(int id);
+    boolean deletePostById(int id);
     List<Post> fetchPostsByForumId(int forumId);
 }

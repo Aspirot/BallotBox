@@ -24,7 +24,7 @@
       <module name="ElectionService" options="-parameters" />
       <module name="ElectorService" options="-parameters" />
       <module name="ForumService" options="-parameters" />
-      <module name="VoteService" options="-parameters --add-modules java.sql,java.base,java.logging" />
+      <module name="VoteService" options="-parameters" />
     </option>
   </component>
 </project>

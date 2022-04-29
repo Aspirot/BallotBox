@@ -59,10 +59,11 @@ public class PostDAO implements IPostDAO{
         collection.insertOne(bson);
     }
 
-    public void deletePostById(int id){
+    public boolean deletePostById(int id){
         MongoCollection<Document> collection =
                 this.mongodbConnector.getDatabase().getCollection("Posts");
-        collection.deleteOne(eq("id",id));
+        var result = collection.deleteOne(eq("id",id));
+        return result.wasAcknowledged();
     }
 
 }

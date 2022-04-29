@@ -1,8 +1,6 @@
 package edu.colval.javase.ballotbox.forumservice.fel;
 
 import edu.colval.javase.ballotbox.forumservice.api.ForumRestService;
-import edu.colval.javase.ballotbox.forumservice.bll.model.Forum;
-import edu.colval.javase.ballotbox.forumservice.bll.model.Post;
 import edu.colval.javase.ballotbox.forumservice.dal.ForumDAO;
 import edu.colval.javase.ballotbox.forumservice.dal.IForumDAO;
 import edu.colval.javase.ballotbox.forumservice.dal.IPostDAO;
@@ -12,8 +10,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
-import java.time.LocalDate;
-import java.util.List;
 
 @SpringBootApplication
 @ComponentScan(basePackageClasses = ForumRestService.class)
@@ -28,9 +24,9 @@ public class ForumServiceApplication {
     public IForumDAO getForumDAO(){
         return new ForumDAO();
     }
-
+//dafuck
     public static void main(String[] args) {
-        SpringApplication.run(ForumServiceApplication.class, args);
+        SpringApplication.run(ForumServiceApplication.class,args);
     }
 
     /*public static void main(String[] args) {
