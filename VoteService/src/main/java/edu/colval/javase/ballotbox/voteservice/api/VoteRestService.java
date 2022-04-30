@@ -11,5 +11,5 @@ public class VoteRestService {
     @Autowired
     private IVoteDAO dao;
 
-    
+
 }

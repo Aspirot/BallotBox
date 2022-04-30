@@ -10,7 +10,14 @@ public class Elector {
     private String email;
 
     public Elector(String login, String password, int weight, String email) {
-        this.id = AUTO_INCREMENT_ID++;
+        this.login = login;
+        this.password = password;
+        this.weight = weight;
+        this.email = email;
+    }
+
+    public Elector(int id, String login, String password, int weight, String email) {
+        this.id = id;
         this.login = login;
         this.password = password;
         this.weight = weight;

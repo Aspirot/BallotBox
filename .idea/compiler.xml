@@ -9,25 +9,20 @@
         <module name="ForumService" />
         <module name="ElectorService" />
         <module name="VoteService" />
-        <module name="Discovery-Service" />
         <module name="ElectionService" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Discovery-Service" target="17" />
       <module name="ElectionService" target="17" />
       <module name="ElectorService" target="17" />
-      <module name="EurekaClient-Service" target="17" />
       <module name="ForumService" target="17" />
       <module name="VoteService" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="Discovery-Service" options="-parameters" />
       <module name="ElectionService" options="-parameters" />
       <module name="ElectorService" options="-parameters" />
-      <module name="EurekaClient-Service" options="-parameters" />
       <module name="ForumService" options="-parameters" />
       <module name="VoteService" options="-parameters" />
     </option>
