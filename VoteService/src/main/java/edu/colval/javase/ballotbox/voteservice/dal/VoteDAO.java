@@ -71,7 +71,7 @@ public class VoteDAO implements IVoteDAO {
         Vote vote = null;
         try {
             String query = String.format("SELECT * FROM Votes " +
-                "WHERE id='%d' AND pollId='%d' AND rank='%d'", searchedCandidateId, searchedPollId, searchRank);
+                "WHERE pollSubjectId='%d' AND pollId='%d' AND rank='%d'", searchedCandidateId, searchedPollId, searchRank);
             vote = doQueryForOne(query);
         } catch (SQLException ex) {
             Logger.getLogger(VoteDAO.class.getName()).log(Level.SEVERE, null, ex);

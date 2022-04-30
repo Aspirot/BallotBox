@@ -38,6 +38,22 @@ public class BallotDAO implements IBallotDAO{
             runUpdateQuery(balElecSql);});
     }
 
+    @Override
+    public void addElectorToBallot(int electorId, int pollId) {
+        String balElecSql =
+                String.format("INSERT INTO BallotElector (pollId, electorId) " +
+                        "VALUES ('%d', '%d');", pollId,electorId);
+        runUpdateQuery(balElecSql);
+    }
+
+    @Override
+    public void addCandidateToBallot(int candidate, int pollId) {
+        String balCanSql =
+                String.format("INSERT INTO BallotCandidate (pollId, candidateId) " +
+                        "VALUES ('%d', '%d');", pollId,candidate);
+        runUpdateQuery(balCanSql);
+    }
+
 
     private void runUpdateQuery(String sql) {
         try {

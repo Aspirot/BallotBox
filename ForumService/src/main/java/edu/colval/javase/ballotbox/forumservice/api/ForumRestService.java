@@ -24,7 +24,7 @@ public class ForumRestService {
     @Autowired
     IForumDAO forumDAO;
     //Post
-    @PostMapping("/makePost")
+    @PostMapping("/createPost")
     public Post createPost(@RequestBody Post newPost){
         this.postDAO.createPost(newPost);
         return newPost;

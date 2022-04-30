@@ -1,6 +1,5 @@
 package edu.colval.javase.ballotbox.forumservice.dal;
 
-import com.google.gson.*;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import edu.colval.javase.ballotbox.forumservice.bll.model.Forum;

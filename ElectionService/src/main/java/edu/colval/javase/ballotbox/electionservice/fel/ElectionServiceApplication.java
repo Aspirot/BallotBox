@@ -1,20 +1,42 @@
 package edu.colval.javase.ballotbox.electionservice.fel;
 
+import edu.colval.javase.ballotbox.electionservice.api.ElectionRestService;
 import edu.colval.javase.ballotbox.electionservice.bll.model.Ballot;
 import edu.colval.javase.ballotbox.electionservice.bll.model.Candidate;
 import edu.colval.javase.ballotbox.electionservice.dal.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 
 @SpringBootApplication
+@ComponentScan(basePackageClasses = ElectionRestService.class)
 public class ElectionServiceApplication {
 
+    I_SQL_Connector sql_connector = new Alwaysdata_SQL_Connector();
+
+    @Bean
+    public ICandidateDAO getCandidateDAO(){
+        return new CandidateDAO(sql_connector);
+    }
+
+    @Bean IBallotDAO getBallotDAO(){
+        return new BallotDAO(sql_connector);
+    }
+
+    @Bean // managed instance
+    //@LoadBalanced
+    public WebClient.Builder getWebClientBuilder() {
+        return WebClient.builder();
+    }
+
     public static void main(String[] args) {
-        //SpringApplication.run(ElectionServiceApplication.class, args);
+        SpringApplication.run(ElectionServiceApplication.class, args);
         //testing method
-         run_usingOnlineRepository();
+         //run_usingOnlineRepository();
     }
 
     private static void run_usingOnlineRepository() {

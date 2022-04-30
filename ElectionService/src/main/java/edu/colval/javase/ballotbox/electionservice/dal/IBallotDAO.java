@@ -8,6 +8,8 @@ import java.util.Optional;
 
 public interface IBallotDAO {
     void addBallot(Ballot ballot);
+    void addElectorToBallot(int electorId, int pollId);
+    void addCandidateToBallot(int candidateId, int pollId);
     List<Ballot> getAllBallots();
     Ballot fetchBallotById(int ballotId);
     void deleteBallotById(int ballotId) throws SQLException;

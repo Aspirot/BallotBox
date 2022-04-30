@@ -16,7 +16,7 @@ public class VoteRestService {
     @Autowired
     private IVoteDAO voteDAO;
 
-    @PostMapping("/makeVote")
+    @PostMapping("/createVote")
     public Vote createVote(@RequestBody Vote newVote){
         this.voteDAO.createVote(newVote);
         return newVote;
