@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -19,7 +18,7 @@ public class VoteRestService {
     @PostMapping("/createVote")
     public Vote createVote(@RequestBody Vote newVote){
         this.voteDAO.createVote(newVote);
-        return newVote;
+        return this.voteDAO.fetchVoteById(newVote.getId());
     }
 
     @RequestMapping("/findAllVotes")
@@ -38,8 +37,9 @@ public class VoteRestService {
 
 
     @RequestMapping("/findVoteByCandidatePollAndRank/{candidateId}/{pollId}/{rank}")
-    public Vote searchVoteByCandidateId_PollId_Rank(@PathVariable("candidateId") int cId,@PathVariable("pollId") int pId, @PathVariable("rank") int rank){
-        return this.voteDAO.fetchVoteByCandidateId_PollId_Rank(cId,pId,rank);
+    public List<Vote> searchVotesByCandidateId_PollId_Rank(@PathVariable("candidateId") int cId, @PathVariable("pollId") int pId, @PathVariable("rank") int rank){
+
+        return this.voteDAO.fetchVotesByCandidateId_PollId_Rank(cId,pId,rank);
     }
             //fetchVoteByElectorId_PollId_Rank
     @RequestMapping("/findVoteByElectorPollAndRank/{electorId}/{pollId}/{rank}")

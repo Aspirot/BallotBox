@@ -27,11 +27,7 @@ public class ElectionServiceApplication {
         return new BallotDAO(sql_connector);
     }
 
-    @Bean // managed instance
-    //@LoadBalanced
-    public WebClient.Builder getWebClientBuilder() {
-        return WebClient.builder();
-    }
+    @Bean WebClient createWebClient(){return WebClient.create();}
 
     public static void main(String[] args) {
         SpringApplication.run(ElectionServiceApplication.class, args);
