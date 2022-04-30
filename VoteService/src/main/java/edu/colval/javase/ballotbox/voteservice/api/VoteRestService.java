@@ -53,5 +53,5 @@ public class VoteRestService {
         this.voteDAO.deleteVoteById(id);
         return deletedVote;
     }
-    
+
 }
