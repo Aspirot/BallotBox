@@ -15,22 +15,19 @@ import static com.mongodb.client.model.Filters.eq;
 public class ForumDAO implements IForumDAO{
 
     I_Mongodb_Connector mongodbConnector = null;
-    List<Forum> forums = null;
 
-    public ForumDAO() {
-        this.mongodbConnector = new Atlas_Mongodb_Connector();
-        findAllForums();
-        findAllForums();
+    public ForumDAO(I_Mongodb_Connector connector) {
+        this.mongodbConnector = connector;
     }
 
     public List<Forum> findAllForums() {
-        this.forums = new ArrayList<>();
+        List<Forum> forums = new ArrayList<>();
         MongoCollection<Document> collection =
                 this.mongodbConnector.getDatabase().getCollection("Forums");
         FindIterable<Document> documents = collection.find();
         for(var doc : documents)
-            this.forums.add(ForumCodec.decode(doc));
-        return this.forums;
+            forums.add(ForumCodec.decode(doc));
+        return forums;
     }
 
     public Forum findForumById(int id) {

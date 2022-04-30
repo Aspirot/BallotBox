@@ -1,15 +1,20 @@
 package edu.colval.javase.ballotbox.electionservice.bll.model;
 
 public class Candidate {
-    private static int AUTO_INCREMENT_ID = 1;
 
     private int id;
     private String name;
     private String description;
     private String image;
 
+    public Candidate(int id, String name, String description, String image) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.image = image;
+    }
+
     public Candidate(String name, String description, String image) {
-        this.id = AUTO_INCREMENT_ID++;
         this.name = name;
         this.description = description;
         this.image = image;

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ballot {
-    private static int AUTO_INCREMENT_ID = 1;
 
     private int id;
     private String title;
@@ -18,8 +17,8 @@ public class Ballot {
     private int forumId;
     private int ownerId;
 
-    public Ballot(String title, LocalDate start, LocalDate end, Boolean isPublic, Boolean isAnonymous, int forumId, int ownerId) {
-        this.id = AUTO_INCREMENT_ID++;
+    public Ballot(Integer id,String title, LocalDate start, LocalDate end, Boolean isPublic, Boolean isAnonymous, int forumId, int ownerId) {
+        this.id = id;
         this.title = title;
         this.start = start;
         this.end = end;
@@ -30,6 +29,19 @@ public class Ballot {
         this.forumId = forumId;
         this.ownerId = ownerId;
     }
+
+    public Ballot(String title, LocalDate start, LocalDate end, Boolean isPublic, Boolean isAnonymous, int forumId, int ownerId) {
+        this.title = title;
+        this.start = start;
+        this.end = end;
+        this.isPublic = isPublic;
+        this.isAnonymous = isAnonymous;
+        this.candidatesId = new ArrayList<>();
+        this.electorsId = new ArrayList<>();
+        this.forumId = forumId;
+        this.ownerId = ownerId;
+    }
+
 
     public void addCandidate(Integer candidate){
         this.candidatesId.add(candidate);
@@ -91,7 +103,7 @@ public class Ballot {
         return candidatesId;
     }
 
-    public void setCandidates(List<Candidate> candidates) {
+    public void setCandidates(List<Integer> candidates) {
         this.candidatesId = candidates;
     }
 

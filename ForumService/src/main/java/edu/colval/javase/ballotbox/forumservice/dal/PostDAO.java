@@ -19,8 +19,8 @@ public class PostDAO implements IPostDAO{
 
     I_Mongodb_Connector mongodbConnector = null;
 
-    public PostDAO() {
-        this.mongodbConnector = new Atlas_Mongodb_Connector();
+    public PostDAO(I_Mongodb_Connector connector) {
+        this.mongodbConnector = connector;
     }
 
 

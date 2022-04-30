@@ -1,6 +1,5 @@
 package edu.colval.javase.ballotbox.electionservice.bll.control;
 
-import dal.ICandidateDAO;
 import edu.colval.javase.ballotbox.electionservice.dal.ICandidateDAO;
 
 public class CandidateController {
@@ -9,7 +8,7 @@ public class CandidateController {
     public CandidateController(ICandidateDAO candidateDAO){
         this.candidateDAO = candidateDAO;
     }
-
+/*
     //added, not used
     public void addCandidateToElection(int candidateId, int pollId)
     {
@@ -22,5 +21,5 @@ public class CandidateController {
 
     public static ICandidateDAO getCandidateDAO() {
         return candidateDAO;
-    }
+    }*/
 }

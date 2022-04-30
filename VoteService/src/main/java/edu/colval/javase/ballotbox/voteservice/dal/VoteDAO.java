@@ -14,8 +14,8 @@ import java.util.logging.Logger;
 public class VoteDAO implements IVoteDAO {
     private I_SQL_Connector driver;
 
-    public VoteDAO() {
-        driver = new Alwaysdata_SQL_Connector();
+    public VoteDAO(I_SQL_Connector connector) {
+        driver = connector;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class VoteDAO implements IVoteDAO {
         Vote vote = null;
         try {
             String query = String.format("SELECT * FROM Votes " +
-                "WHERE voteId='%d'", searchedVoteId);
+                "WHERE id='%d'", searchedVoteId);
             vote = doQueryForOne(query);
         } catch (SQLException ex) {
             Logger.getLogger(VoteDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -69,7 +69,7 @@ public class VoteDAO implements IVoteDAO {
         Vote vote = null;
         try {
             String query = String.format("SELECT * FROM Votes " +
-                "WHERE voteId='%d' AND pollId='%d' AND rank='%d'", searchedCandidateId, searchedPollId, searchRank);
+                "WHERE id='%d' AND pollId='%d' AND rank='%d'", searchedCandidateId, searchedPollId, searchRank);
             vote = doQueryForOne(query);
         } catch (SQLException ex) {
             Logger.getLogger(VoteDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -90,6 +90,14 @@ public class VoteDAO implements IVoteDAO {
         return vote;
     }
 
+    @Override
+    public void deleteVoteById(int id) throws SQLException {
+        String query = String.format("DELETE FROM Votes " +
+                "WHERE id='%d'", id);
+        Statement st = this.driver.getConnection().createStatement();
+        st.executeQuery(query);
+    }
+
     private Vote doQueryForOne(String query) throws SQLException {
         Vote vote = null;
         Statement st = this.driver.getConnection().createStatement();
@@ -101,7 +109,7 @@ public class VoteDAO implements IVoteDAO {
         return vote;
     }
     private List<Vote> doQueryForList(String query) throws SQLException {
-        List<Vote> votes = null;
+        List<Vote> votes = new ArrayList<>();
         Statement st = this.driver.getConnection().createStatement();
         ResultSet result = st.executeQuery(query);
 

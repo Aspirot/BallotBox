@@ -3,7 +3,6 @@ package edu.colval.javase.ballotbox.voteservice.bll.model;
 import java.time.LocalDate;
 
 public class Vote implements Comparable<Vote>{
-    private static int AUTO_INCREMENT_ID = 1;
 
     private int id;
     private LocalDate when;
@@ -11,15 +10,6 @@ public class Vote implements Comparable<Vote>{
     private int pollId;
     private int pollSubjectId;
     private int electorId;
-
-    public Vote(LocalDate when, int rank, int pollId, int pollSubjectId, int electorId) {
-        this.id = AUTO_INCREMENT_ID++;
-        this.when = when;
-        this.rank = rank;
-        this.pollId = pollId;
-        this.pollSubjectId = pollSubjectId;
-        this.electorId = electorId;
-    }
 
     public Vote(int id, LocalDate when, int rank, int pollId, int pollSubjectId, int electorId) {
         this.id = id;

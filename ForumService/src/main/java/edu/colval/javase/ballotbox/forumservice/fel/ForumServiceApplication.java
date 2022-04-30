@@ -1,10 +1,7 @@
 package edu.colval.javase.ballotbox.forumservice.fel;
 
 import edu.colval.javase.ballotbox.forumservice.api.ForumRestService;
-import edu.colval.javase.ballotbox.forumservice.dal.ForumDAO;
-import edu.colval.javase.ballotbox.forumservice.dal.IForumDAO;
-import edu.colval.javase.ballotbox.forumservice.dal.IPostDAO;
-import edu.colval.javase.ballotbox.forumservice.dal.PostDAO;
+import edu.colval.javase.ballotbox.forumservice.dal.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,14 +20,15 @@ import java.util.List;
 @ComponentScan(basePackageClasses = ForumRestService.class)
 public class ForumServiceApplication {
 
+    I_Mongodb_Connector mongodbConnector = new Atlas_Mongodb_Connector();
     @Bean
     public IPostDAO getPostDAO(){
-        return new PostDAO();
+        return new PostDAO(mongodbConnector);
     }
 
     @Bean
     public IForumDAO getForumDAO(){
-        return new ForumDAO();
+        return new ForumDAO(mongodbConnector);
     }
 //dafuck
     public static void main(String[] args) {

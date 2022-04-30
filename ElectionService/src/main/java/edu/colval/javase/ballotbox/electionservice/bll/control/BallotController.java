@@ -1,9 +1,5 @@
 package edu.colval.javase.ballotbox.electionservice.bll.control;
 
-import bll.model.Ballot;
-import bll.model.Candidate;
-import bll.model.Vote;
-import dal.IBallotDAO;
 import edu.colval.javase.ballotbox.electionservice.bll.model.Ballot;
 import edu.colval.javase.ballotbox.electionservice.dal.IBallotDAO;
 
@@ -16,7 +12,7 @@ public class BallotController {
     public BallotController(IBallotDAO ballotDAO){
         this.ballotDAO = ballotDAO;
     }
-
+/*
     public void createBallot(String title, LocalDate start, LocalDate end, Boolean isPublic, Boolean isAnonymous, int forumid, int ownerId){
         Ballot ballot = new Ballot(title,start,end,isPublic,isAnonymous,forumid,ownerId);
         this.ballotDAO.addBallot(ballot);
@@ -95,7 +91,7 @@ public class BallotController {
         Candidate loser = null;
         List<Candidate> polylist = ballotDAO.fetchBallotById(ballotId).get().getCandidates();
         removeLastPlace(polylist, losing, loser);*/
-
+/*
         int numberOfOptions= 0;
         List<Integer> polylist = ballotDAO.fetchBallotById(ballotId).get().getCandidates();
         int winnerPoint= 0;
