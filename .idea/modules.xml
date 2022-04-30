@@ -3,10 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Discovery-Service/Discovery-Service.iml" filepath="$PROJECT_DIR$/Discovery-Service/Discovery-Service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ElectionService/ElectionService.iml" filepath="$PROJECT_DIR$/ElectionService/ElectionService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ElectionService/Election-Service.iml" filepath="$PROJECT_DIR$/ElectionService/Election-Service.iml" />
       <module fileurl="file://$PROJECT_DIR$/ElectorService/ElectorService.iml" filepath="$PROJECT_DIR$/ElectorService/ElectorService.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ForumService/ForumService.iml" filepath="$PROJECT_DIR$/ForumService/ForumService.iml" />
-      <module fileurl="file://$PROJECT_DIR$/VoteService/VoteService.iml" filepath="$PROJECT_DIR$/VoteService/VoteService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ForumService/Forum-Service.iml" filepath="$PROJECT_DIR$/ForumService/Forum-Service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/VoteService/Vote-Service.iml" filepath="$PROJECT_DIR$/VoteService/Vote-Service.iml" />
     </modules>
   </component>
 </project>
