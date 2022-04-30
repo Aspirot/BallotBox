@@ -9,6 +9,5 @@ public interface IElectorDAO {
     void addElector(Elector elector);
     List<Elector> getAllElectors();
     Optional<Elector> fetchElectorById(int electorId);
-    //nous n'avons pas trouvez de update qui serait nécessaire pour les électeurs
     void deleteElector(int electorId);
 }

@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 //localhost:8083/api/forumService
 @RequestMapping("/api/forumService")
 public class ForumRestService {
@@ -36,9 +37,7 @@ public class ForumRestService {
 
     @RequestMapping("/findPost/{id}")
     public Post searchPostById(@PathVariable("id") int id){
-        Post found = null;
-        found = this.postDAO.findPostById(id);
-        return found;
+        return this.postDAO.findPostById(id);
     }
 
     @DeleteMapping("/deletePost/{id}")
@@ -61,15 +60,12 @@ public class ForumRestService {
 
     @RequestMapping("/findForum/{id}")
     public Forum searchForumById(@PathVariable("id") int id){
-        Forum found = null;
-        found = this.forumDAO.findForumById(id);
-        return found;
+        return this.forumDAO.findForumById(id);
     }
 
     @RequestMapping("/findPosts/byForum/{forumId}")
     public List<Post> searchPostsByForumId(@PathVariable("forumId") int forumId){
-        List<Post> posts = postDAO.fetchPostsByForumId(forumId);
-        return posts;
+        return this.postDAO.fetchPostsByForumId(forumId);
     }
 
     @DeleteMapping("/deleteForum/{id}")

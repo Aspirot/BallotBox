@@ -20,6 +20,14 @@ public class Vote implements Comparable<Vote>{
         this.electorId = electorId;
     }
 
+    public Vote(LocalDate when, int rank, int pollId, int pollSubjectId, int electorId) {
+        this.when = when;
+        this.rank = rank;
+        this.pollId = pollId;
+        this.pollSubjectId = pollSubjectId;
+        this.electorId = electorId;
+    }
+
     public int getId() {
         return id;
     }

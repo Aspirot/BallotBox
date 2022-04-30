@@ -19,10 +19,10 @@ public class VoteDAO implements IVoteDAO {
     }
 
     @Override
-    public void createVote( LocalDate when, int rank, int pollId, int pollSubjectId, int electorId){
+    public void createVote(Vote vote){
         String sql = String.format("INSERT INTO Votes (dateVoteMade, rank, pollId, pollSubjectId, electorId) " +
             "VALUES ('%s', '%d', '%d', '%d', '%d');",
-            when.toString().substring(0, 10), rank, pollId, pollSubjectId, electorId);
+            vote.getWhen().toString().substring(0, 10), vote.getRank(), vote.getPollId(), vote.getPollSubjectId(), vote.getElectorId());
         runUpdateQuery(sql);
     }
 
@@ -64,6 +64,8 @@ public class VoteDAO implements IVoteDAO {
         return vote;
     }
 
+
+
     @Override
     public Vote fetchVoteByCandidateId_PollId_Rank(int searchedCandidateId, int searchedPollId, int searchRank) {
         Vote vote = null;
@@ -88,6 +90,19 @@ public class VoteDAO implements IVoteDAO {
             Logger.getLogger(VoteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return vote;
+    }
+
+    @Override
+    public List<Vote> fetchVotesByPollIdAndRank(int pollId, int rank) {
+        List<Vote> votes = null;
+        try {
+            String query = String.format("SELECT * FROM Votes " +
+                    "WHERE pollId='%d' AND rank='%d'", pollId, rank);
+            votes = doQueryForList(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(VoteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return votes;
     }
 
     @Override

@@ -12,7 +12,7 @@ public class BallotController {
     public BallotController(IBallotDAO ballotDAO){
         this.ballotDAO = ballotDAO;
     }
-/*
+
     public void createBallot(String title, LocalDate start, LocalDate end, Boolean isPublic, Boolean isAnonymous, int forumid, int ownerId){
         Ballot ballot = new Ballot(title,start,end,isPublic,isAnonymous,forumid,ownerId);
         this.ballotDAO.addBallot(ballot);
@@ -91,7 +91,7 @@ public class BallotController {
         Candidate loser = null;
         List<Candidate> polylist = ballotDAO.fetchBallotById(ballotId).get().getCandidates();
         removeLastPlace(polylist, losing, loser);*/
-/*
+
         int numberOfOptions= 0;
         List<Integer> polylist = ballotDAO.fetchBallotById(ballotId).get().getCandidates();
         int winnerPoint= 0;
@@ -132,7 +132,7 @@ public class BallotController {
         return ballotDAO;
     }
 
-    /*public void removeLastPlace(List<Candidate> polylist, int losing, Candidate loser){
+    public void removeLastPlace(List<Candidate> polylist, int losing, Candidate loser){
         Candidate winner;
         for(Candidate candidate:polylist){
 
@@ -161,6 +161,6 @@ public class BallotController {
         }
 
         return winner;
-    }*/
+    }
 
 }

@@ -7,11 +7,12 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface IVoteDAO {
-    void createVote(LocalDate when, int rank, int pollId, int pollSubjectId, int electorId);
+    void createVote(Vote vote);
     List<Vote> findAllVotes();
     List<Vote> getAllVotesForBallot(int searchedPollId);
     Vote fetchVoteById(int searchedVoteId);
     Vote fetchVoteByCandidateId_PollId_Rank(int searchedCandidateId, int searchedPollId, int searchRank);
     Vote fetchVoteByElectorId_PollId_Rank(int searchedElectorId, int searchedPollId, int searchedRank);
+    List<Vote> fetchVotesByPollIdAndRank(int pollId, int rank);
     void deleteVoteById(int id) throws SQLException;
 }
