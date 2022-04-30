@@ -2,6 +2,7 @@ package edu.colval.javase.ballotbox.electorservice.bll.control;
 
 import dal.IElectorDAO;
 import edu.colval.javase.ballotbox.electorservice.bll.model.Elector;
+import edu.colval.javase.ballotbox.electorservice.dal.IElectorDAO;
 
 public class ElectorController {
     private IElectorDAO electorDAO;
