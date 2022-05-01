@@ -48,6 +48,16 @@ public class ElectionRestService {
         return winner;
     }
 
+    @GetMapping("/ballot/findAll")
+    public List<Ballot> fetchAllBallots(){
+        return this.ballotDAO.getAllBallots();
+    }
+
+    @GetMapping("/ballot/find/{pollId}")
+    public Ballot findBallotById(@PathVariable("pollId") int pollId){
+        return this.ballotDAO.fetchBallotById(pollId);
+    }
+
     @GetMapping("/ballot/getNumberOfElectors/{pollId}")
     public Integer findNumberOfElectorsForBallot(@PathVariable("pollId") int pollId){
         return this.ballotDAO.fetchBallotById(pollId).getElectors().size();
@@ -68,7 +78,7 @@ public class ElectionRestService {
         int winnerPoint= 0;
         int winner=-1;
         numberOfOptions = this.ballotDAO.fetchBallotById(pollId).getCandidates().size();
-        int currentCandidatePoints = 0;
+        int currentCandidatePoints;
         for (Integer c : this.ballotDAO.fetchBallotById(pollId).getCandidates())
         {
             currentCandidatePoints = 0;
@@ -136,10 +146,27 @@ public class ElectionRestService {
         this.ballotDAO.addCandidateToBallot(candidateId,pollId);
     }
 
+    @GetMapping("/candidate/findAll")
+    public List<Candidate> findAllCandidates(){
+        return this.candidateDAO.getAllCandidates();
+    }
+
+    @GetMapping("/candidate/find/{candidateId}")
+    public Candidate findCandidateById(@PathVariable("candidateId") int candidateId){
+        return this.candidateDAO.fetchCandidateById(candidateId);
+    }
+
     @GetMapping("/candidate/getNumberOfVotesByRank/{candidateId}/{pollId}/{rank}")
     public Integer  findNumberOfInFavorByCandidate(@PathVariable("candidateId") int candidateId,@PathVariable("pollId") int pollId,@PathVariable("rank") int rank){
         String uri = String.format("http://localhost:8084/api/voteService/findVoteByCandidatePollAndRank/%d/%d/%d",candidateId,pollId,rank);
         return this.fetchVotesWithQuery(uri).size();
+    }
+
+    @DeleteMapping("/candidate/delete/{candidateId}")
+    public Candidate deleteCandidateById(@PathVariable("candidateId") int candidateId) throws SQLException {
+        Candidate deletedCandidate = this.candidateDAO.fetchCandidateById(candidateId);
+        this.candidateDAO.deleteCandidateById(candidateId);
+        return deletedCandidate;
     }
 
 }
