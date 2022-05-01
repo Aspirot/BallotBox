@@ -152,4 +152,11 @@ public class ElectionRestService {
         return this.fetchVotesWithQuery(uri).size();
     }
 
+    @DeleteMapping("/candidate/delete/{candidateId}")
+    public Candidate deleteCandidateById(@PathVariable("candidateId") int candidateId) throws SQLException {
+        Candidate deletedCandidate = this.candidateDAO.fetchCandidateById(candidateId);
+        this.candidateDAO.deleteCandidateById(candidateId);
+        return deletedCandidate;
+    }
+
 }
