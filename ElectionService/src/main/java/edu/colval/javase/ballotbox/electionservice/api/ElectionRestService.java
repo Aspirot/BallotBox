@@ -22,7 +22,7 @@ public class ElectionRestService {
     @Autowired
     private ICandidateDAO candidateDAO;
     @Autowired
-    private IBallotDAO ballotDAO;
+    public IBallotDAO ballotDAO;
     @Autowired
     private WebClient client;
 
@@ -48,6 +48,14 @@ public class ElectionRestService {
         return winner;
     }
 
+    @GetMapping("/fromElector/addToElection")
+    public boolean addElectorToBallot(@RequestParam Map<String, String> candidateParticipationQuery){
+        Integer electorId = Integer.parseInt(candidateParticipationQuery.get("electorId"));
+        Integer pollId = Integer.parseInt(candidateParticipationQuery.get("pollId"));
+        this.ballotDAO.addCandidateToBallot(electorId,pollId);
+        return true;
+    }
+
     @GetMapping("/ballot/findAll")
     public List<Ballot> fetchAllBallots(){
         return this.ballotDAO.getAllBallots();
@@ -70,7 +78,7 @@ public class ElectionRestService {
         return deletedBallot;
     }
 
-    private Integer polyScan(int pollId){
+    public Integer polyScan(int pollId){
         String uri = "http://localhost:8084/api/voteService/findVotesByBallot/" + pollId;
         List<Vote_DTO> allBallotVotes = this.fetchVotesWithQuery(uri);
 
@@ -105,7 +113,7 @@ public class ElectionRestService {
         return winner;
     }
 
-    private Integer loneScan(int pollId){
+    public Integer loneScan(int pollId){
         String uri = String.format("http://localhost:8084/api/voteService/findVotesByPollAndRank/%d/%d",pollId,1);
         List<Vote_DTO> allRank1Votes = this.fetchVotesWithQuery(uri);
         int winner = -1;
@@ -120,7 +128,7 @@ public class ElectionRestService {
         return winner;
     }
 
-    private List<Vote_DTO> fetchVotesWithQuery(String uri){
+    public List<Vote_DTO> fetchVotesWithQuery(String uri){
         List<Vote_DTO> vote_dtos = new ArrayList<>();
         vote_dtos = this.client.get()
                 .uri(uri)

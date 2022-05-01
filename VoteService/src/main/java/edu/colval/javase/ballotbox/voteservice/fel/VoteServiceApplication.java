@@ -27,13 +27,16 @@ public class VoteServiceApplication {
     }
 
     public static void main(String[] args) {
+
         SpringApplication.run(VoteServiceApplication.class, args);
+        //run_usingOnlineRepository();
     }
 
-    /*public static void main(String[] args) {
-        VoteDAO voteDAO = new VoteDAO();
-        voteDAO.createVote(LocalDate.parse("2002-02-06"), 1, 1, 1, 1);
+    private static void run_usingOnlineRepository() {
+        VoteDAO voteDAO = new VoteDAO(new Alwaysdata_SQL_Connector());
+        voteDAO.createVote(new Vote(LocalDate.parse("2002-02-06"), 1, 1, 1, 1));
         List<Vote> voteList = voteDAO.findAllVotes();
         voteList.stream().forEach(vote -> System.out.println(vote.toString()));
-    }*/
+    }
+
 }

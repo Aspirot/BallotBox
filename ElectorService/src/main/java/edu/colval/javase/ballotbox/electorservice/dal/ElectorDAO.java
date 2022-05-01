@@ -40,6 +40,14 @@ public class ElectorDAO implements IElectorDAO{
     }
 
     @Override
+    public void addElectorToBallot(int electorId, int pollId) {
+        String balElecSql =
+                String.format("INSERT INTO boey_electionservice.Test (asdd, id) " +
+                        "VALUES ('%d', '%d');", pollId,electorId);
+        runUpdateQuery(balElecSql);
+    }
+
+    @Override
     public Elector fetchElectorById(int searchedElectorId) {
         Elector elector = null;
         try {

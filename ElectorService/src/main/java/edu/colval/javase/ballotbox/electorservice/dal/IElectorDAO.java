@@ -9,6 +9,7 @@ import java.util.Optional;
 public interface IElectorDAO {
     void addElector(Elector elector);
     List<Elector> getAllElectors();
+    void addElectorToBallot(int electorId, int pollId);
     Elector fetchElectorById(int electorId);
     void deleteElector(int electorId) throws SQLException;
 }
