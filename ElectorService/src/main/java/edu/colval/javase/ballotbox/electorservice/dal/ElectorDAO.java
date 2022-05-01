@@ -1,6 +1,5 @@
 package edu.colval.javase.ballotbox.electorservice.dal;
 
-import bll.model.Elector;
 import edu.colval.javase.ballotbox.electorservice.bll.model.Elector;
 
 import java.sql.ResultSet;
@@ -44,7 +43,7 @@ public class ElectorDAO implements IElectorDAO{
     public Elector fetchElectorById(int searchedElectorId) {
         Elector elector = null;
         try {
-            String query = String.format("SELECT * FROM Votes " +
+            String query = String.format("SELECT * FROM Electors " +
                     "WHERE id='%d'", searchedElectorId);
             elector = doQueryForOne(query);
         } catch (SQLException ex) {
@@ -54,9 +53,9 @@ public class ElectorDAO implements IElectorDAO{
     }
 
     @Override
-    public void deleteElector(int seachedElectorId) throws SQLException {
+    public void deleteElector(int searchedElectorId) throws SQLException {
         String query = String.format("DELETE FROM Electors " +
-                "WHERE id='%d'", seachedElectorId);
+                "WHERE id='%d'", searchedElectorId);
         Statement st = this.driver.getConnection().createStatement();
         st.executeQuery(query);
     }
@@ -76,7 +75,7 @@ public class ElectorDAO implements IElectorDAO{
         ResultSet result = st.executeQuery(query);
 
         while (result.next()) {
-            electors.add(returnVoteFromResult(result));
+            electors.add(returnElectorFromResult(result));
         }
         return electors;
     }
@@ -87,12 +86,12 @@ public class ElectorDAO implements IElectorDAO{
         ResultSet result = st.executeQuery(query);
 
         while (result.next()) {
-            elector=returnVoteFromResult(result);
+            elector=returnElectorFromResult(result);
         }
         return elector;
     }
 
-    private Elector returnVoteFromResult(ResultSet result) throws SQLException {
+    private Elector returnElectorFromResult(ResultSet result) throws SQLException {
         int electorId = result.getInt("id");
         String login = result.getString("login");
         String password = result.getString("password");
