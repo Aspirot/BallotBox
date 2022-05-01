@@ -48,6 +48,11 @@ public class ElectionRestService {
         return winner;
     }
 
+    @GetMapping("/ballot/find/{pollId}")
+    public Ballot findBallotById(@PathVariable("pollId") int pollId){
+        return this.ballotDAO.fetchBallotById(pollId);
+    }
+
     @GetMapping("/ballot/getNumberOfElectors/{pollId}")
     public Integer findNumberOfElectorsForBallot(@PathVariable("pollId") int pollId){
         return this.ballotDAO.fetchBallotById(pollId).getElectors().size();
@@ -68,7 +73,7 @@ public class ElectionRestService {
         int winnerPoint= 0;
         int winner=-1;
         numberOfOptions = this.ballotDAO.fetchBallotById(pollId).getCandidates().size();
-        int currentCandidatePoints = 0;
+        int currentCandidatePoints;
         for (Integer c : this.ballotDAO.fetchBallotById(pollId).getCandidates())
         {
             currentCandidatePoints = 0;
@@ -134,6 +139,11 @@ public class ElectionRestService {
         Integer candidateId = candidateParticipationQuery.get("candidateId");
         Integer pollId = candidateParticipationQuery.get("pollId");
         this.ballotDAO.addCandidateToBallot(candidateId,pollId);
+    }
+
+    @GetMapping("/candidate/find/{candidateId}")
+    public Candidate findCandidateById(@PathVariable("candidateId") int candidateId){
+        return this.candidateDAO.fetchCandidateById(candidateId);
     }
 
     @GetMapping("/candidate/getNumberOfVotesByRank/{candidateId}/{pollId}/{rank}")
