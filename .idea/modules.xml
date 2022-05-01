@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Discovery-Service/DiscoveryService.iml" filepath="$PROJECT_DIR$/Discovery-Service/DiscoveryService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DiscoveryService/Discovery-Service.iml" filepath="$PROJECT_DIR$/DiscoveryService/Discovery-Service.iml" />
       <module fileurl="file://$PROJECT_DIR$/ElectionService/ElectionService.iml" filepath="$PROJECT_DIR$/ElectionService/ElectionService.iml" />
       <module fileurl="file://$PROJECT_DIR$/ElectorService/ElectorService.iml" filepath="$PROJECT_DIR$/ElectorService/ElectorService.iml" />
       <module fileurl="file://$PROJECT_DIR$/ForumService/ForumService.iml" filepath="$PROJECT_DIR$/ForumService/ForumService.iml" />

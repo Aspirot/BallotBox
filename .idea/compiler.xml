@@ -9,11 +9,12 @@
         <module name="ElectorService" />
         <module name="ForumService" />
         <module name="VoteService" />
-        <module name="DiscoveryService" />
+        <module name="Discovery-Service" />
         <module name="ElectionService" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Discovery-Service" target="17" />
       <module name="DiscoveryService" target="17" />
       <module name="ElectionService" target="17" />
       <module name="ElectorService" target="17" />
@@ -23,6 +24,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Discovery-Service" options="-parameters" />
       <module name="DiscoveryService" options="-parameters" />
       <module name="ElectionService" options="-parameters" />
       <module name="ElectorService" options="-parameters" />

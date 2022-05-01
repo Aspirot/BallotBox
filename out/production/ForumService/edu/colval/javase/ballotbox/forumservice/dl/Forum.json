@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "title":"Jack Daniel's unexpected win",
+    "createdOn":"1985-06-16"
+  },
+  {
+    "id": 2,
+    "title":"Joe Blow's massive loss",
+    "createdOn":"2000-09-11"
+  },
+  {
+    "id": 3,
+    "title":"Leeroy's advanced maneuvers",
+    "createdOn":"2020-01-01"
+  }
+]
