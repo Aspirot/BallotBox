@@ -48,6 +48,11 @@ public class ElectionRestService {
         return winner;
     }
 
+    @GetMapping("/ballot/findAll")
+    public List<Ballot> fetchAllBallots(){
+        return this.ballotDAO.getAllBallots();
+    }
+
     @GetMapping("/ballot/find/{pollId}")
     public Ballot findBallotById(@PathVariable("pollId") int pollId){
         return this.ballotDAO.fetchBallotById(pollId);
@@ -139,6 +144,11 @@ public class ElectionRestService {
         Integer candidateId = candidateParticipationQuery.get("candidateId");
         Integer pollId = candidateParticipationQuery.get("pollId");
         this.ballotDAO.addCandidateToBallot(candidateId,pollId);
+    }
+
+    @GetMapping("/candidate/findAll")
+    public List<Candidate> findAllCandidates(){
+        return this.candidateDAO.getAllCandidates();
     }
 
     @GetMapping("/candidate/find/{candidateId}")
