@@ -1,9 +1,9 @@
 package edu.colval.javase.ballotbox.electionservice.api;
 
+import edu.colval.javase.ballotbox.electionservice.bll.control.ElectionController;
 import edu.colval.javase.ballotbox.electionservice.bll.model.Ballot;
 import edu.colval.javase.ballotbox.electionservice.bll.model.Candidate;
-import edu.colval.javase.ballotbox.electionservice.dal.IBallotDAO;
-import edu.colval.javase.ballotbox.electionservice.dal.ICandidateDAO;
+import edu.colval.javase.ballotbox.electionservice.dal.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -19,40 +19,44 @@ import java.util.Map;
 @CrossOrigin
 @RequestMapping("/api/electionService")
 public class ElectionRestService {
-    @Autowired
-    private ICandidateDAO candidateDAO;
-    @Autowired
-    public IBallotDAO ballotDAO;
+
+
+
     @Autowired
     private WebClient client;
 
+    I_SQL_Connector sql_connector = new Alwaysdata_SQL_Connector();
+    private IBallotDAO ballotDAO = new BallotDAO(sql_connector);
+    private ICandidateDAO candidateDAO = new CandidateDAO(sql_connector);
+    private ElectionController electionController;
     //Ballot
     @PostMapping("/ballot/create")
-    public Ballot createBallot(@RequestBody Ballot newBallot){
+    public void createBallot(@RequestBody Ballot newBallot){
         this.ballotDAO.addBallot(newBallot);
-        return this.ballotDAO.fetchBallotById(newBallot.getId());
     }
 
     @GetMapping(value = "/ballot/getWinner", produces = "application/json; charset=UTF-8")
     public Integer findWinnerOfElection(@RequestParam Map<String, String> electionWinnerQuery){
         String scanType = electionWinnerQuery.get("type");
         Integer pollId = Integer.valueOf(electionWinnerQuery.get("pollId"));
-        int winner = -1;
-        if(pollId>0 && pollId<=this.ballotDAO.getAllBallots().size()) {
-            if (scanType.equals("poly-scan")) {
-                winner = this.polyScan(pollId);
-            } else if (scanType.equals("lone-scan")) {
-                winner = this.loneScan(pollId);
-            }
+        electionController = new ElectionController(ballotDAO);
+        if (scanType.equals("poly-scan")) {
+            String uri = "http://localhost:8084/api/voteService/findVotesByBallot/" + pollId;
+            List<Vote_DTO> allBallotVotes = this.fetchVotesWithQuery(uri);
+            return this.electionController.polyScan(pollId, allBallotVotes);
+        } else if (scanType.equals("lone-scan")) {
+            String uri = String.format("http://localhost:8084/api/voteService/findVotesByPollAndRank/%d/%d",pollId,1);
+            List<Vote_DTO> allRank1Votes = this.fetchVotesWithQuery(uri);
+            return this.electionController.loneScan(pollId,allRank1Votes);
         }
-        return winner;
+        return -1;
     }
 
     @GetMapping("/fromElector/addToElection")
     public boolean addElectorToBallot(@RequestParam Map<String, String> candidateParticipationQuery){
         Integer electorId = Integer.parseInt(candidateParticipationQuery.get("electorId"));
         Integer pollId = Integer.parseInt(candidateParticipationQuery.get("pollId"));
-        this.ballotDAO.addCandidateToBallot(electorId,pollId);
+        this.ballotDAO.addElectorToBallot(electorId,pollId);
         return true;
     }
 
@@ -76,56 +80,6 @@ public class ElectionRestService {
         Ballot deletedBallot = this.ballotDAO.fetchBallotById(pollId);
         this.ballotDAO.deleteBallotById(pollId);
         return deletedBallot;
-    }
-
-    public Integer polyScan(int pollId){
-        String uri = "http://localhost:8084/api/voteService/findVotesByBallot/" + pollId;
-        List<Vote_DTO> allBallotVotes = this.fetchVotesWithQuery(uri);
-
-        int numberOfOptions= 0;
-        int winnerPoint= 0;
-        int winner=-1;
-        numberOfOptions = this.ballotDAO.fetchBallotById(pollId).getCandidates().size();
-        int currentCandidatePoints;
-        for (Integer c : this.ballotDAO.fetchBallotById(pollId).getCandidates())
-        {
-            currentCandidatePoints = 0;
-            for(Vote_DTO vote: allBallotVotes)
-            {
-                if(c==vote.getPollSubjectId())
-                {
-                    for(int p=1,r=numberOfOptions; r>0;r--,p++)
-                    {
-                        if(vote.getRank()==p)
-                        {
-                            currentCandidatePoints=currentCandidatePoints+r;
-                        }
-                    }
-                }
-            }
-            System.out.println("cand " + c + " has " + currentCandidatePoints);
-            if(currentCandidatePoints>winnerPoint)
-            {
-                winnerPoint=currentCandidatePoints;
-                winner=c;
-            }
-        }
-        return winner;
-    }
-
-    public Integer loneScan(int pollId){
-        String uri = String.format("http://localhost:8084/api/voteService/findVotesByPollAndRank/%d/%d",pollId,1);
-        List<Vote_DTO> allRank1Votes = this.fetchVotesWithQuery(uri);
-        int winner = -1;
-        int winnerNumb = -1;
-        for (Integer candidate:this.ballotDAO.fetchBallotById(pollId).getCandidates()) {
-            int currentCand = allRank1Votes.stream().filter(v -> v.getPollSubjectId()==candidate).toList().size();
-            if(winnerNumb<currentCand){
-                winner=candidate;
-                winnerNumb = currentCand;
-            }
-        }
-        return winner;
     }
 
     public List<Vote_DTO> fetchVotesWithQuery(String uri){

@@ -19,13 +19,6 @@ import java.util.List;
 @ComponentScan(basePackageClasses = VoteRestService.class)
 public class VoteServiceApplication {
 
-    @Bean
-    public IVoteDAO getVoteDAO(){
-        I_SQL_Connector sql_connector = new Alwaysdata_SQL_Connector();
-        IVoteDAO voteDAO = new VoteDAO(sql_connector);
-        return voteDAO;
-    }
-
     public static void main(String[] args) {
 
         SpringApplication.run(VoteServiceApplication.class, args);

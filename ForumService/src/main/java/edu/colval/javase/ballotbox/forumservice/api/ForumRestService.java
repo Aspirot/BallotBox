@@ -2,8 +2,7 @@ package edu.colval.javase.ballotbox.forumservice.api;
 
 import edu.colval.javase.ballotbox.forumservice.bll.model.Forum;
 import edu.colval.javase.ballotbox.forumservice.bll.model.Post;
-import edu.colval.javase.ballotbox.forumservice.dal.IForumDAO;
-import edu.colval.javase.ballotbox.forumservice.dal.IPostDAO;
+import edu.colval.javase.ballotbox.forumservice.dal.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -18,11 +17,9 @@ import java.util.List;
 @RequestMapping("/api/forumService")
 public class ForumRestService {
 
-    @Autowired
-    IPostDAO postDAO;
-
-    @Autowired
-    IForumDAO forumDAO;
+    I_Mongodb_Connector mongodbConnector = new Atlas_Mongodb_Connector();
+    IPostDAO postDAO = new PostDAO(mongodbConnector);
+    IForumDAO forumDAO = new ForumDAO(mongodbConnector);
     //Post
     @PostMapping("/createPost")
     public Post createPost(@RequestBody Post newPost){

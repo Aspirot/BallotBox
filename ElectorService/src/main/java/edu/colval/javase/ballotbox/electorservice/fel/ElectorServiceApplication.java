@@ -17,11 +17,7 @@ import java.util.List;
 @SpringBootApplication
 @ComponentScan(basePackageClasses = ElectorRestService.class)
 public class ElectorServiceApplication {
-    I_SQL_Connector sql_connector = new Alwaysdata_SQL_Connector();
-    @Bean
-    public IElectorDAO getElectorDAO(){
-        return new ElectorDAO(sql_connector);
-    }
+
     @Bean
     public WebClient createWebClient(){return WebClient.create();}
 

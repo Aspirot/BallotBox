@@ -1,7 +1,10 @@
 package edu.colval.javase.ballotbox.electorservice.api;
 
 import edu.colval.javase.ballotbox.electorservice.bll.model.Elector;
+import edu.colval.javase.ballotbox.electorservice.dal.Alwaysdata_SQL_Connector;
+import edu.colval.javase.ballotbox.electorservice.dal.ElectorDAO;
 import edu.colval.javase.ballotbox.electorservice.dal.IElectorDAO;
+import edu.colval.javase.ballotbox.electorservice.dal.I_SQL_Connector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +19,8 @@ import java.util.Map;
 @CrossOrigin
 @RequestMapping("/api/electorService")
 public class ElectorRestService {
-    @Autowired
-    private IElectorDAO electorDAO;
+    I_SQL_Connector sql_connector = new Alwaysdata_SQL_Connector();
+    private IElectorDAO electorDAO = new ElectorDAO(sql_connector);
     @Autowired
     private WebClient client;
 

@@ -16,16 +16,6 @@ import java.util.List;
 @ComponentScan(basePackageClasses = ElectionRestService.class)
 public class ElectionServiceApplication {
 
-    I_SQL_Connector sql_connector = new Alwaysdata_SQL_Connector();
-
-    @Bean
-    public ICandidateDAO getCandidateDAO(){
-        return new CandidateDAO(sql_connector);
-    }
-
-    @Bean IBallotDAO getBallotDAO(){
-        return new BallotDAO(sql_connector);
-    }
 
     @Bean WebClient createWebClient(){return WebClient.create();}
 

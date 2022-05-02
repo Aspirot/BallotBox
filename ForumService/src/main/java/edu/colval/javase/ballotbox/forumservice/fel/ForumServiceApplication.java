@@ -25,19 +25,6 @@ import java.util.List;
 @ComponentScan(basePackageClasses = ForumRestService.class)
 public class ForumServiceApplication {
 
-    I_Mongodb_Connector mongodbConnector = new Atlas_Mongodb_Connector();
-    @Bean
-    public IPostDAO getPostDAO(){
-        return new PostDAO(mongodbConnector);
-    }
-
-    @Bean
-    public IForumDAO getForumDAO(){
-        return new ForumDAO(mongodbConnector);
-    }
-
-
-//dafuck
     public static void main(String[] args) {
         //run_usingOnlineRepository();
         SpringApplication.run(ForumServiceApplication.class,args);

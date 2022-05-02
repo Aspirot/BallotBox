@@ -1,7 +1,10 @@
 package edu.colval.javase.ballotbox.voteservice.api;
 
 import edu.colval.javase.ballotbox.voteservice.bll.model.Vote;
+import edu.colval.javase.ballotbox.voteservice.dal.Alwaysdata_SQL_Connector;
 import edu.colval.javase.ballotbox.voteservice.dal.IVoteDAO;
+import edu.colval.javase.ballotbox.voteservice.dal.I_SQL_Connector;
+import edu.colval.javase.ballotbox.voteservice.dal.VoteDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,8 +15,9 @@ import java.util.List;
 @CrossOrigin
 @RequestMapping("/api/voteService")
 public class VoteRestService {
-    @Autowired
-    private IVoteDAO voteDAO;
+
+    I_SQL_Connector sql_connector = new Alwaysdata_SQL_Connector();
+    private IVoteDAO voteDAO = new VoteDAO(sql_connector);
 
     @PostMapping("/createVote")
     public Vote createVote(@RequestBody Vote newVote){
