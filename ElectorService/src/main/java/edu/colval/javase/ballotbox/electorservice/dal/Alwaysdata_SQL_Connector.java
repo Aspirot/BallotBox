@@ -23,7 +23,7 @@ public class Alwaysdata_SQL_Connector implements I_SQL_Connector{
         datasource.setPassword("ballotbox");
         datasource.setServerName("mysql-boey.alwaysdata.net"); //.com
         datasource.setPort(3306);
-        datasource.setDatabaseName("boey_electorervice");
+        datasource.setDatabaseName("boey_electorservice");
         Connection conn;
         // connection-string : jdbc:mariadb://mysql-boey.alwaysdata.net:3306/boey_electorservice?user=boey&password=ballotbox
         try {

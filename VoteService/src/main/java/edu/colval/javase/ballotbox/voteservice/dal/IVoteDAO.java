@@ -14,4 +14,5 @@ public interface IVoteDAO {
     Vote fetchVoteByElectorId_PollId_Rank(int searchedElectorId, int searchedPollId, int searchedRank);
     List<Vote> fetchVotesByPollIdAndRank(int pollId, int rank);
     void deleteVoteById(int id) throws SQLException;
+    List<Vote> getVotesForElectorAndBallot(int electorId,int ballotId);
 }

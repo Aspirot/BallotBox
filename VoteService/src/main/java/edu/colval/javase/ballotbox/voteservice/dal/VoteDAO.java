@@ -52,6 +52,19 @@ public class VoteDAO implements IVoteDAO {
     }
 
     @Override
+    public List<Vote> getVotesForElectorAndBallot(int electorId,int ballotId) {
+        List<Vote> votes = new ArrayList();
+        try {
+            String query = String.format("SELECT * FROM Votes " +
+                    "WHERE pollId='%d' AND electorId='%d'", ballotId,electorId);
+            votes = doQueryForList(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(VoteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return votes;
+    }
+
+    @Override
     public Vote fetchVoteById(int searchedVoteId) {
         Vote vote = null;
         try {

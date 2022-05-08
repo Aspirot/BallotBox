@@ -19,7 +19,7 @@ import java.util.Map;
 @CrossOrigin
 @RequestMapping("/api/electorService")
 public class ElectorRestService {
-    I_SQL_Connector sql_connector = new Alwaysdata_SQL_Connector();
+    private I_SQL_Connector sql_connector = new Alwaysdata_SQL_Connector();
     private IElectorDAO electorDAO = new ElectorDAO(sql_connector);
     @Autowired
     private WebClient client;

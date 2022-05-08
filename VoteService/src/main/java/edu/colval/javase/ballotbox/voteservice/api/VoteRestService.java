@@ -58,4 +58,9 @@ public class VoteRestService {
         return deletedVote;
     }
 
+    @RequestMapping("/findVoteByElectorAndPoll/{electorId}/{pollId}")
+    public List<Vote> searchVoteByElectorId_PollId(@PathVariable("electorId") int eId,@PathVariable("pollId") int pId){
+        return this.voteDAO.getVotesForElectorAndBallot(eId,pId);
+    }
+
 }
